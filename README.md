@@ -38,6 +38,12 @@ session = Selenium::Session.new(driver, capabilities)
 session.url = "http://crystal-lang.org/api"
 pp session.url # => "http://crystal-lang.org/api"
 
+# optionally base_url can be set:
+session.base_url = "http://crystal-lang.org" # configuration
+session.url = "/api"                         # navigation
+pp session.url # => "http://crystal-lang.org/api"
+# set base_url = "" to use absolute URLs (default)
+
 input = session.find_element(:css, "input[type=search]")
 input.send_keys("Client")
 sleep 1

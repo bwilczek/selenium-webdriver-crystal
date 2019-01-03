@@ -19,6 +19,7 @@ module Selenium
     # TODO: Storage (local, session)
     # TODO: Log
 
+    property base_url : String
     getter driver : Webdriver
     getter! id : String
     getter! capabilities : Hash(String, JSON::Any)
@@ -32,6 +33,7 @@ module Selenium
 
       @id = response["sessionId"].as_s
       @capabilities = response["value"].as_h
+      @base_url = ""
 
       if url
         self.url = url
@@ -63,7 +65,7 @@ module Selenium
     end
 
     def url=(url)
-      post("/url", {url: url})
+      post("/url", {url: "#{@base_url}#{url}"})
     end
 
     def forward

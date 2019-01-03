@@ -2,6 +2,13 @@ require "./test_helper"
 require "uuid"
 
 class SessionTest < Minitest::Test
+  def test_base_url
+    session.base_url = "https://crystal-lang.org"
+    session.url = "/"
+    assert_equal "https://crystal-lang.org/", session.url
+    session.base_url = ""
+  end
+
   def test_navigation
     session.url = "https://crystal-lang.org"
     assert_equal "https://crystal-lang.org/", session.url
